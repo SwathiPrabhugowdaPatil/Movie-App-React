@@ -1,20 +1,18 @@
-// TMDB API service.
-//
-// TODO: paste your API key (v3 auth) here. Get one at themoviedb.org ->
-// Settings -> API -> "API Key (v3 auth)". Example shape:
-//
-//   const API_KEY = "your_tmdb_api_key_here";
-//
-// Base URL for every request:
-//
-//   const BASE_URL = "https://api.themoviedb.org/3";
+const API_KEY = "b1e79c518abe4e10fce08c7d0f2ee476";
+const BASE_URL = "https://api.themoviedb.org/3";
 
-// TODO: export async function getPopularMovies()
-//   GET `${BASE_URL}/movie/popular?api_key=${API_KEY}`
-//   Return response.json() and use its .results array.
+export const getPopularMovies = async () => {
+  const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
+  const data = await response.json();
+  return data.results;
+};
 
-// TODO: export async function searchMovies(query)
-//   GET `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
-//   Also return the parsed JSON so the page can read .results.
-
-export {};
+export const searchMovies = async (query) => {
+  const response = await fetch(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+      query,
+    )}`,
+  );
+  const data = await response.json();
+  return data.results;
+};

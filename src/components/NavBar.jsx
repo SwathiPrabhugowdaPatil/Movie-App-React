@@ -1,11 +1,22 @@
+import { Link } from "react-router-dom";
 import "../css/Navbar.css";
 
-// TODO: render the navigation bar.
-//   - A brand/title inside .navbar-brand.
-//   - A .navbar-links container with <NavLink> entries for "/" (Home)
-//     and "/favorites" (Favorites). <NavLink> gives you the .active class
-//     for the current route automatically.
-
-export default function NavBar() {
-  return <nav className="navbar">TODO: navigation</nav>;
+function NavBar() {
+  return (
+    <nav className="navbar">
+      <div className="navbar-brand">
+        <Link to="/">Movie App</Link>
+      </div>
+      <div className="navbar-links">
+        <Link to="/" className="nav-link">
+          Home
+        </Link>
+        <Link to="/favorites" className="nav-link">
+          Favorites
+        </Link>
+      </div>
+    </nav>
+  );
 }
+
+export default NavBar;

@@ -1,13 +1,38 @@
 import "../css/MovieCard.css";
+import { useMovieContext } from "../contexts/MovieContext";
 
-// TODO: render a single movie card. Take a `movie` prop and:
-//   - Build the poster URL: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-//     and render it inside .movie-poster.
-//   - Show the title and release year (movie.release_date.slice(0, 4)).
-//   - Add a .movie-overlay with a .favorite-btn that toggles the favorite
-//     state via useMovie() from src/contexts/MovieContext.jsx.
-//     Give the button the "active" class when the movie is a favorite.
+function MovieCard({ movie }) {
+  const { isFavorite, addToFavorites, removeFromFavorites } = useMovieContext();
+  const favorite = isFavorite(movie.id);
 
-export default function MovieCard() {
-  return <div className="movie-card">TODO: movie card</div>;
+  function onFavoriteClick(e) {
+    e.preventDefault();
+    if (favorite) removeFromFavorites(movie.id);
+    else addToFavorites(movie);
+  }
+
+  return (
+    <div className="movie-card">
+      <div className="movie-poster">
+        <img
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={movie.title}
+        />
+        <div className="movie-overlay">
+          <button
+            className={`favorite-btn ${favorite ? "active" : ""}`}
+            onClick={onFavoriteClick}
+          >
+            ♥
+          </button>
+        </div>
+      </div>
+      <div className="movie-info">
+        <h3>{movie.title}</h3>
+        <p>{movie.release_date?.split("-")[0]}</p>
+      </div>
+    </div>
+  );
 }
+
+export default MovieCard;

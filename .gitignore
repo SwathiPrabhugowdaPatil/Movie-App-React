@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Agent instructions (local coaching notes)
+AGENTS.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
